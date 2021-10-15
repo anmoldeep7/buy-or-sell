@@ -1,0 +1,8 @@
+punkt
+wordnet
+stopwords
+pros_cons
+reuters
+universal_tagset
+snowball_data
+rslp

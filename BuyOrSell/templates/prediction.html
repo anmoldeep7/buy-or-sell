@@ -1,0 +1,27 @@
+
+{% extends "layout.html" %}
+{% block content %}
+<div class="card bg-transparent border-0">
+	<div class="text-center bg-secondary text-white p-2 rounded" id="custCard2">
+		<h3 class="text-white ">Get our prediction</h3>
+	</div>
+	<div class="text-center text-muted p-2" >
+	  Please enter a stock ticker
+	</div>
+	<br>
+	<div class="text-center">
+	  <form id='input' method='post' action='plot' class="form-inline justify-content-center">
+	  	<div class="text-center form-group mx-sm-3 mt-5 mb-5">
+		  <label for="ticker" class="sr-only">i.e. GOOG</label>
+		  <input id="ticker" type='text' name='ticker' class="form-control" placeholder="i.e. GOOG" required minlength="2" maxlength="5"/>
+		  <input class="btn btn-primary mx-sm-3 mb-5 mt-5" type="submit" value="Submit" >
+	  	</div>
+	  </form>
+	</div>
+	<br>
+	<br>
+	<div id="pageloader">
+		<img src="static/wordcloud/loading.gif" alt="processing..." />
+	</div>
+</div>
+{% endblock content %}

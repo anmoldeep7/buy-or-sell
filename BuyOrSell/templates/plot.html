@@ -1,0 +1,136 @@
+{% extends 'layout.html' %}
+
+{% block style %}
+<link rel="stylesheet" type="text/css" href="{{ data2.cdn_css.0 }}">
+{% endblock %}
+
+{% block js %}
+	<script src="{{ data2.cdn_js.0 }}"></script>
+
+{% endblock %}
+
+{% block content %}
+
+<div>
+	<h1>{{ data3.company | safe }}</h1>
+	{{ data2.div2 | safe }}
+</div>
+<br>
+<div class="card border-0">
+<div class="card-title text-center list-group-item-secondary">
+<h3>Last week behaviour</h3>
+</div>
+<div id="twitter" class="row">
+        <div class="col-md-6">
+			<p>Twitter Sentiment Analysis</p>
+				{{ data3.div3 | safe }}
+		</div>
+		<div class="col-md-6">
+			<p> Weekly Stock Analysis </p>
+			<table class="table table-bordered table-hover table-sm text-center">
+				<thead class=" thead-dark">
+				  <tr>
+					<th scope="col">Date</th>
+					<th scope="col">Closing Price ($)</th>
+					<th scope="col">Volume Traded ($)</th>
+				  </tr>
+				</thead>
+				<tbody>
+					{% for key, value in data3.seven.items() %}
+				  <tr>
+					<td scope="row"> {{ value.DateString }}</td>
+					<td>{{ value.Close }}</td>
+					<td>{{ value.Volume }}</td>
+					{% endfor %}
+				  </tr>
+				</tbody>
+			</table>
+			<p>
+
+			</p>
+			<p>Stock Price Variance</p>
+			<p></p>
+			<h5>{{ data3.perc }} %</h5>
+			<p></p>
+		</div>
+</div>
+</div>
+<br>
+<br>
+<br>
+<div class="card">
+	<div id="twitter" class="card-title text-center list-group-item-secondary">	
+		<h3>Twitter Word Cloud</h3>
+	</div>
+	<div id="cloudimg">
+		<img class="img-fluid" src="{{ cloud_img }}">
+	</div>
+</div>
+<br>
+<br>
+<br>
+<div id="prediction" class="card">
+	<div class="card-title text-center list-group-item-secondary"><h3>Machine Learning Model FIT - (LTSM)</h3></div>
+	<div class="">
+			
+			{{ data4.div4 | safe }}
+	</div>
+
+</div>	
+	<br>
+	<div class="card border-0">
+		<div class="card-title text-center list-group-item-secondary">
+			<h3>Prediction</h3>
+		</div>
+	<br>
+
+	<div class="row mt-2">
+		<div class="col">
+			<div id="pred">
+				<p id="nextdays" > Next 5 days predicted price:</p>
+				{% for day in data4.prediction %}
+				<li class="list-group-item list-group-item-light">{{ day }} $</li>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col">
+			<p></p>
+			<div id="pred">
+				<p id="rmse" > calculated RMSE = {{ data4.rmse | safe }}</p>
+			</div>
+			<div id="upordown">
+				<p > the price is going <em class="font-weight-bold">{{ data4.word | safe}} </em>in the next 5 days</p>
+				<br>
+				<img class="img-fluid" {{ data4.gif | safe}}>
+			</div>
+		</div>
+	</div>	
+	<br>
+	<br>
+	<br>
+</div>
+{% endblock %}
+{% block side %}
+	<div class="content-section">
+	  <h3>Recent Tweets:</h3>
+	  <p class="text-muted w-75">
+		<ul class="list-group" id="el">
+			{% for tweet in data3.last_tweets %}
+		  <li class="list-group-item list-group-item-light">{{ tweet }}</li>
+		  	{% endfor %}
+		</ul>
+	  </p>
+	</div>
+  </div>
+{% endblock %}
+
+
+{% block script %}
+	<!-- <script src="static/waitforcloud.js"></script>-->
+	<script">{{ data2.script2 | safe }}</script>
+	<script">{{ data3.script3 | safe }}</script>
+	<script">{{ data4.script4 | safe }}</script>
+	<script type="text/javascript" src="https://d3js.org/d3.v3.min.js"/></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"/></script>
+
+{% endblock %}
